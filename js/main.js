@@ -15,7 +15,7 @@ function getUrlVars(gm_url) {
 
 function built_anchor(G) {
     if(jQuery('#canvas_frame').contents().find('div[role="main"]:contains("Scanning for viruses...")').length == 0) {
-        var attachment_rows = jQuery('#canvas_frame').contents().find('div[role="main"] div.hq.gt');
+        var attachment_rows = jQuery('#canvas_frame').contents().find('div[role="main"] div.hq.gt table');
         jQuery.each(attachment_rows, function(i, $attachment) {
             var view_node = jQuery($attachment).find("a:contains('View')");
             if(view_node.length > 0) {
@@ -44,7 +44,7 @@ function built_anchor(G) {
 function generate_download_url(gm_url) {
     // Check if we already have our "ik" property in the gm_url
     var url_vars = getUrlVars(gm_url);
-    return 'https://docs.google.com/viewer?a=sv&attid=0.1&pid=gmail&thid=' + url_vars.th + '&ik=' + url_vars.ik + '&disp=safe&zw&view=att&th=' + url_vars.th;
+    return 'https://docs.google.com/viewer?a=sv&attid=' + url_vars.attid +'&pid=gmail&thid=' + url_vars.th + '&ik=' + url_vars.ik + '&disp=safe&zw&view=att&th=' + url_vars.th;
 }
 
 Gmailr.init(function(G) {
