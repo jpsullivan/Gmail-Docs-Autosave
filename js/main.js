@@ -1,7 +1,6 @@
 Gmailr.debug = false; // Turn verbose debugging messages on
 
 function built_anchor(G) {
-    console.log('rebuilding');
     if(jQuery('#canvas_frame').contents().find('div[role="main"]:contains("Scanning for viruses...")').length == 0) {
         var attachment_rows = jQuery('#canvas_frame').contents().find('div[role="main"] div.hq.gt');
         jQuery.each(attachment_rows, function(i, $attachment) {

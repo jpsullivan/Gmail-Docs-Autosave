@@ -395,10 +395,8 @@
             
             try {
                 var m = /[?&]act=([^&]+)/.exec(params.url);
-                console.log(m);
                 if(m && m[1]) {
                     var action = decodeURIComponent(m[1]);
-                    console.log(action);
                     var count = 1;
                     
                     var urlParams = $.deparam(params.url);
