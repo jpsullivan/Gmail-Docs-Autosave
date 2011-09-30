@@ -1,5 +1,18 @@
 Gmailr.debug = false; // Turn verbose debugging messages on
 
+function getUrlVars(gm_url) {
+    gm_url = decodeURIComponent(gm_url);
+    var vars = [], hash;
+    var hashes = gm_url.slice(gm_url.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+
 function built_anchor(G) {
     if(jQuery('#canvas_frame').contents().find('div[role="main"]:contains("Scanning for viruses...")').length == 0) {
         var attachment_rows = jQuery('#canvas_frame').contents().find('div[role="main"] div.hq.gt');
@@ -10,7 +23,9 @@ function built_anchor(G) {
                 if(!_href.length > 0) {
                     built_anchor(G);
                 }
-                _href = _href.replace('viewer?a=v', 'viewer?a=sv');
+                var urlVars = getUrlVars(_href);
+//                _href = _href.replace('viewer?a=v', 'viewer?a=sv');
+                _href = generate_download_url(_href);
 
                 var download_link = jQuery("<a>").attr({
                     "class" : "docs_autosave_anchor",
@@ -24,6 +39,12 @@ function built_anchor(G) {
             }
         });
     }
+}
+
+function generate_download_url(gm_url) {
+    // Check if we already have our "ik" property in the gm_url
+    var url_vars = getUrlVars(gm_url);
+    return 'https://docs.google.com/viewer?a=sv&attid=0.1&pid=gmail&thid=' + url_vars.th + '&ik=' + url_vars.ik + '&disp=safe&zw&view=att&th=' + url_vars.th;
 }
 
 Gmailr.init(function(G) {
