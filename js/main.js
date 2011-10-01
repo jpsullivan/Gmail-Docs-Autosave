@@ -27,11 +27,13 @@ function built_anchor(G) {
 //                _href = _href.replace('viewer?a=v', 'viewer?a=sv');
                 _href = generate_download_url(_href);
 
-                var download_link = jQuery("<a>").attr({
-                    "class" : "docs_autosave_anchor",
-                    "target": "_blank",
-                    "href"  : _href
-                }).append('Save To Docs');
+                var download_link = jQuery("<a>")
+                    .attr({
+                        "class" : "docs_autosave_anchor",
+                        "target": "_blank",
+                        "href"  : _href
+                    })
+                    .append('Save To Docs');
 
                 view_node.after(download_link);
                 view_node.after("&nbsp;&nbsp;&nbsp;");
