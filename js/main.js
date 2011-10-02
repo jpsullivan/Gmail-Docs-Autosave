@@ -23,7 +23,6 @@ function built_anchor(G) {
                 if(!_href.length > 0) {
                     built_anchor(G);
                 }
-                var urlVars = getUrlVars(_href);
 //                _href = _href.replace('viewer?a=v', 'viewer?a=sv');
                 _href = generate_download_url(_href);
 
@@ -47,7 +46,8 @@ function generate_download_url(gm_url) {
     // Check if we already have our "ik" property in the gm_url
     var url_vars = getUrlVars(gm_url),
         url_split = gm_url.substring(0,gm_url.indexOf('?') +1),
-        params = "";
+        params = "",
+        result = '';
     jQuery.each(url_vars, function(i, $url_var) {
         if(url_vars[$url_var] === void 0) { // if array key-value is undefined...
             params += '&'+$url_var;
@@ -57,7 +57,9 @@ function generate_download_url(gm_url) {
             }
         }
     });
-    return url_split + 'a=sv' + params;
+    var encoded_uri = encodeURIComponent(window.location.origin + window.location.pathname + url_split + 'a=sv' + params);
+    result = 'https://docs.google.com/viewer?a=sv&pid=gmail&thid=' + url_vars.th + '&attid=' + url_vars.attid + params + '&url=' + encoded_uri;
+    return result;
 }
 
 Gmailr.init(function(G) {
