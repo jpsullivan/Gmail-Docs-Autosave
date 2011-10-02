@@ -45,8 +45,19 @@ function built_anchor(G) {
 
 function generate_download_url(gm_url) {
     // Check if we already have our "ik" property in the gm_url
-    var url_vars = getUrlVars(gm_url);
-    return 'https://docs.google.com/viewer?a=sv&attid=' + url_vars.attid +'&pid=gmail&thid=' + url_vars.th + '&ik=' + url_vars.ik + '&disp=safe&zw&view=att&th=' + url_vars.th;
+    var url_vars = getUrlVars(gm_url),
+        url_split = gm_url.substring(0,gm_url.indexOf('?') +1),
+        params = "";
+    jQuery.each(url_vars, function(i, $url_var) {
+        if(url_vars[$url_var] === void 0) { // if array key-value is undefined...
+            params += '&'+$url_var;
+        } else {
+            if($url_var !== 'a') {
+                params += '&'+$url_var+'='+url_vars[$url_var];
+            }
+        }
+    });
+    return url_split + 'a=sv' + params;
 }
 
 Gmailr.init(function(G) {
