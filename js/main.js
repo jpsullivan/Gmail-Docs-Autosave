@@ -55,7 +55,9 @@ function generate_download_url(gm_url) {
         }
     });
 
-    if(url_vars.url.substr(0) === '?') {
+    if(!url_vars.hasOwnProperty('url')) {
+        var encoded_uri = encodeURIComponent(window.location.origin + window.location.pathname + url_split + 'a=sv' + params);
+    } else if(url_vars.url.substr(0) === '?') {
         var encoded_uri = encodeURIComponent(window.location.origin + window.location.pathname + url_split + 'a=sv' + params);
     } else {
         var encoded_uri = encodeURIComponent(url_split + 'a=sv' + params);
