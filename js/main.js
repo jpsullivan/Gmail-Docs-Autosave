@@ -20,10 +20,6 @@ function built_anchor(G) {
             var view_node = jQuery($attachment).find("a:contains('View')");
             if(view_node.length > 0) {
                 var _href = view_node.attr('href');
-                if(!_href.length > 0) {
-                    built_anchor(G);
-                }
-//                _href = _href.replace('viewer?a=v', 'viewer?a=sv');
                 _href = generate_download_url(_href);
 
                 var download_link = jQuery("<a>")
@@ -48,17 +44,24 @@ function generate_download_url(gm_url) {
         url_split = gm_url.substring(0,gm_url.indexOf('?') +1),
         params = "",
         result = '';
+
     jQuery.each(url_vars, function(i, $url_var) {
         if(url_vars[$url_var] === void 0) { // if array key-value is undefined...
             params += '&'+$url_var;
         } else {
-            if($url_var !== 'a') {
+            if($url_var !== "a" && $url_var !== "url") {
                 params += '&'+$url_var+'='+url_vars[$url_var];
             }
         }
     });
-    var encoded_uri = encodeURIComponent(window.location.origin + window.location.pathname + url_split + 'a=sv' + params);
+
+    if(url_vars.url.substr(0) === '?') {
+        var encoded_uri = encodeURIComponent(window.location.origin + window.location.pathname + url_split + 'a=sv' + params);
+    } else {
+        var encoded_uri = encodeURIComponent(url_split + 'a=sv' + params);
+    }
     result = 'https://docs.google.com/viewer?a=sv&pid=gmail&thid=' + url_vars.th + '&attid=' + url_vars.attid + params + '&url=' + encoded_uri;
+
     return result;
 }
 
