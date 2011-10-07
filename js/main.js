@@ -70,7 +70,7 @@ function generate_download_url(gm_url) {
 Gmailr.init(function(G) {
     G.observe('viewChanged', function(view) {
         if(view == 'conversation') {
-            $(document).everyTime('1s', function(i) {
+            jQuery(document).everyTime('1s', function(i) {
                 built_anchor(G);
             });
         }

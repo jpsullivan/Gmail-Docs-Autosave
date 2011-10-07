@@ -28,22 +28,7 @@ if(top.document == document) {
         newScript.src = path;
         headID.appendChild(newScript);
     };
-    
-    // Pass data to inserted scripts via DOM elements
-    addData("jquery_path",     chrome.extension.getURL("js/lib/jquery-1.6.4.min.js"));
-    addData("jquery_bbq_path", chrome.extension.getURL("js/lib/jquery.ba-bbq.js"));
-    addData("jQuery_timer_path", chrome.extension.getURL("js/lib/jquery.timer.min.js"));
-    addData("gmailr_path",     chrome.extension.getURL("js/lib/gmailr.js"));
-    addData("main_path",       chrome.extension.getURL("js/main.js"));
-    
-    // Load the initialization scripts
-//    loadScript(chrome.extension.getURL("js/lib/lab.js"));
-//    loadScript(chrome.extension.getURL("js/lib/init.js"));
 
-loadScript(chrome.extension.getURL("js/lib/jquery-1.6.4.min.js"));
-loadScript(chrome.extension.getURL("js/lib/jquery.ba-bbq.js"));
-loadScript(chrome.extension.getURL("js/lib/jquery.timer.min.js"));
-loadScript(chrome.extension.getURL("js/lib/gmailr.js"));
-loadScript(chrome.extension.getURL("js/main.js"));
-
+    loadScript(chrome.extension.getURL("js/lib/scripts.js"));
+    loadScript(chrome.extension.getURL("js/main.js"));
 };

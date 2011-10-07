@@ -1,6 +1,6 @@
 {
     "name": "Gmail Attachments To Docs",
-    "version": "1.2.5",
+    "version": "1.2.7",
     "description": "Save those pesky Gmail attachments directly to Google Docs from the attachment list itself with a newly added Save To Docs link.",
     "icons": {
       "128": "img/icon128.png",
@@ -15,8 +15,8 @@
     "content_scripts": [
         {
             "matches" : ["*://mail.google.com/*"],
-            "js": ["js/lib/bootstrap.js"],
-            "run_at": "document_end"
+            "js": ["js/lib/scripts.js", "js/main.js"],
+            "run_at": "document_start"
         }
     ]
 }
