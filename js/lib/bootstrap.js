@@ -8,7 +8,7 @@
 
 // Only run this script in the top-most frame (there are multiple frames in Gmail)
 if(top.document == document) {
-    
+
     // Adds a data DOM element that simply holds a string in an attribute, to be read
     // by the injected scripts.
     var addData = function(id, val) {
@@ -29,6 +29,16 @@ if(top.document == document) {
         headID.appendChild(newScript);
     };
 
-    loadScript(chrome.extension.getURL("js/lib/scripts.js"));
-    loadScript(chrome.extension.getURL("js/main.js"));
+    yepnope({
+        load: [chrome.extension.getURL("js/lib/jquery-1.6.4.min.js"), chrome.extension.getURL("js/lib/jquery.ba-bbq.js"), chrome.extension.getURL("js/lib/gmailr.js")],
+        complete: function () {
+            yepnope(chrome.extension.getURL("js/main.js?n=8937276128"));
+        }
+    });
+
+
+    
+//    // Load the initialization scripts
+//    loadScript(chrome.extension.getURL("js/lib/lab.js"));
+//    loadScript(chrome.extension.getURL("js/lib/init.js"));
 };

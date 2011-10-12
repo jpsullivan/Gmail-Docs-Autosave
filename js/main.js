@@ -1,4 +1,9 @@
-Gmailr.debug = false; // Turn verbose debugging messages on
+Gmailr.debug = true; // Turn verbose debugging messages on
+
+var DOM_UPDATE_REPROCESS_WAIT_TIME_MS = 1000;  // 1s
+var NUM_TIMES_CHECKED_FOR_DOM = 0;
+// Timer used to reprocess the page on updates after a delay.
+var linkCheckTimer = undefined;
 
 function getUrlVars(gm_url) {
     gm_url = decodeURIComponent(gm_url);
@@ -13,7 +18,7 @@ function getUrlVars(gm_url) {
     return vars;
 }
 
-function built_anchor(G) {
+function built_anchor() {
     if(jQuery('#canvas_frame').contents().find('div[role="main"]:contains("Scanning for viruses...")').length == 0) {
         var attachment_rows = jQuery('#canvas_frame').contents().find('div[role="main"] div.hq.gt table');
         jQuery.each(attachment_rows, function(i, $attachment) {
@@ -32,10 +37,34 @@ function built_anchor(G) {
 
                 view_node.after(download_link);
                 view_node.after("&nbsp;&nbsp;&nbsp;");
-                $(document).stopTime();
+                
+                verify_add_link();
+            } else {
+                // maybe we're ahead of schedule.  Try again (if allowed)
+                if (NUM_TIMES_CHECKED_FOR_DOM < 5) {
+                    // Try again
+                    clearTimeout(linkCheckTimer);
+                    var linkCheckTimer = setTimeout(function() {
+                        built_anchor();
+                    }, DOM_UPDATE_REPROCESS_WAIT_TIME_MS);
+                } else {
+                    // Assume the element simply isn't there.  Move along, citizen.
+                    clear_timers();
+                }
             }
         });
     }
+}
+
+function verify_add_link() {
+    if(jQuery('a.docs_autosave_anchor').length) {
+        clear_timers();
+    }
+}
+
+function clear_timers() {
+    clearTimeout(linkCheckTimer);
+    linkCheckTimer = undefined;
 }
 
 function generate_download_url(gm_url) {
@@ -67,12 +96,18 @@ function generate_download_url(gm_url) {
     return result;
 }
 
+function handleDomChanges() {
+    clearTimeout(linkCheckTimer);
+    var linkCheckTimer = setTimeout(function() {
+        built_anchor();
+    }, DOM_UPDATE_REPROCESS_WAIT_TIME_MS);
+}
+
 Gmailr.init(function(G) {
     G.observe('viewChanged', function(view) {
+        console.log(view);
         if(view == 'conversation') {
-            jQuery(document).everyTime('1s', function(i) {
-                built_anchor(G);
-            });
+            handleDomChanges();
         }
     });
 });
