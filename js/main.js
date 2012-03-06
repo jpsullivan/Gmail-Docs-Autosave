@@ -1,9 +1,7 @@
 Gmailr.debug = true; // Turn verbose debugging messages on
 
-var DOM_UPDATE_REPROCESS_WAIT_TIME_MS = 1000;  // 1s
+var DOM_UPDATE_REPROCESS_WAIT_TIME_MS = 250;  // .25s
 var NUM_TIMES_CHECKED_FOR_DOM = 0;
-// Timer used to reprocess the page on updates after a delay.
-var linkCheckTimer = undefined;
 
 function getUrlVars(gm_url) {
     gm_url = decodeURIComponent(gm_url);
@@ -19,52 +17,38 @@ function getUrlVars(gm_url) {
 }
 
 function built_anchor() {
-    if(jQuery('#canvas_frame').contents().find('div[role="main"]:contains("Scanning for viruses...")').length == 0) {
+    var scanningText = "Scanning for viruses...";
+    if(jQuery('#canvas_frame').contents().find('div[role="main"].filter(":contains('+ scanningText +')")').length == 0) {
         var attachment_rows = jQuery('#canvas_frame').contents().find('div[role="main"] div.hq.gt table');
         jQuery.each(attachment_rows, function(i, $attachment) {
-            var view_node = jQuery($attachment).find("a:contains('View')");
-            if(view_node.length > 0) {
-                var _href = view_node.attr('href');
-                _href = generate_download_url(_href);
+            jQuery.doTimeout('buildAnchor', DOM_UPDATE_REPROCESS_WAIT_TIME_MS, function() {
+                var view_node = jQuery($attachment).find('a[href*="&disp=inline"][href*="&safe=1&zw"]');
+                if(view_node.length > 0) {
+                    var _href = view_node.attr('href');
+                    _href = generate_download_url(_href);
 
-                var download_link = jQuery("<a>")
-                    .attr({
-                        "class" : "docs_autosave_anchor",
-                        "target": "_blank",
-                        "href"  : _href
-                    })
-                    .append('Save To Docs');
+                    var download_link = jQuery("<a>")
+                        .attr({
+                            "class" : "docs_autosave_anchor",
+                            "target": "_blank",
+                            "href"  : _href,
+                            "style" : "text-decoration:none;"
+                        })
+                        .append('Save To Docs');
 
-                view_node.after(download_link);
-                view_node.after("&nbsp;&nbsp;&nbsp;");
-                
-                verify_add_link();
-            } else {
-                // maybe we're ahead of schedule.  Try again (if allowed)
-                if (NUM_TIMES_CHECKED_FOR_DOM < 5) {
-                    // Try again
-                    clearTimeout(linkCheckTimer);
-                    var linkCheckTimer = setTimeout(function() {
-                        built_anchor();
-                    }, DOM_UPDATE_REPROCESS_WAIT_TIME_MS);
+                    view_node.after(download_link);
+                    view_node.after("&nbsp;&nbsp;&nbsp;");
+                    
+                    if(jQuery('a.docs_autosave_anchor').length) {
+                        return false;
+                    }
                 } else {
-                    // Assume the element simply isn't there.  Move along, citizen.
-                    clear_timers();
+                    return true;
                 }
-            }
+            });
+            
         });
     }
-}
-
-function verify_add_link() {
-    if(jQuery('a.docs_autosave_anchor').length) {
-        clear_timers();
-    }
-}
-
-function clear_timers() {
-    clearTimeout(linkCheckTimer);
-    linkCheckTimer = undefined;
 }
 
 function generate_download_url(gm_url) {
@@ -97,10 +81,9 @@ function generate_download_url(gm_url) {
 }
 
 function handleDomChanges() {
-    clearTimeout(linkCheckTimer);
-    var linkCheckTimer = setTimeout(function() {
+    jQuery.doTimeout('domChanges', DOM_UPDATE_REPROCESS_WAIT_TIME_MS, function() {
         built_anchor();
-    }, DOM_UPDATE_REPROCESS_WAIT_TIME_MS);
+    });
 }
 
 Gmailr.init(function(G) {

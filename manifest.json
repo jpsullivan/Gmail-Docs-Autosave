@@ -15,7 +15,7 @@
     "content_scripts": [
         {
             "matches" : ["*://mail.google.com/*"],
-            "js": ["js/lib/yepnope.js","js/lib/bootstrap.js"],
+            "js": ["js/lib/yepnope-1.5.3-min.js","js/lib/bootstrap.js"],
             "run_at": "document_end"
         }
     ]
