@@ -31,10 +31,8 @@ if(top.document == document) {
 
     yepnope({
         load: [
-                chrome.extension.getURL("js/lib/jquery-1.6.4.min.js"), 
-                chrome.extension.getURL("js/lib/jquery.ba-bbq.js"), 
-                chrome.extension.getURL("js/lib/jquery.doTimeout-min.js"), 
-                chrome.extension.getURL("js/lib/gmailr.js")],
+                chrome.extension.getURL("js/lib/jquery-1.6.4.min.js"),
+                chrome.extension.getURL("js/lib/jquery.doTimeout-min.js")],
         complete: function () {
             yepnope(chrome.extension.getURL("js/main.js?n=8937276128"));
             console.log('Loaded main.js');

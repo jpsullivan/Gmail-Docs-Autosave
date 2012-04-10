@@ -1,6 +1,6 @@
-Gmailr.debug = false; // Turn verbose debugging messages on
+//Gmailr.debug = false; // Turn verbose debugging messages on
 
-var DOM_UPDATE_REPROCESS_WAIT_TIME_MS = 250;  // .25s
+var DOM_UPDATE_REPROCESS_WAIT_TIME_MS = 3000;  // 3s
 var NUM_TIMES_CHECKED_FOR_DOM = 0;
 
 function getUrlVars(gm_url) {
@@ -17,37 +17,67 @@ function getUrlVars(gm_url) {
 }
 
 function built_anchor() {
-    var attachment_rows = jQuery('#canvas_frame').contents().find('div[role="main"] div.hq.gt table');
-    jQuery.each(attachment_rows, function(i, $attachment) {
-        jQuery.doTimeout('buildAnchor', DOM_UPDATE_REPROCESS_WAIT_TIME_MS, function() {
-            var view_node = jQuery($attachment).find('a[href*="&disp=inline"][href*="&safe=1&zw"]');
-            console.log($attachment);
-            if(view_node.length > 0) {
-                var _href = view_node.attr('href');
+    // var attachment_rows = jQuery('#canvas_frame').contents().find('div[role="main"] div.hq.gt table');
+    // jQuery.each(attachment_rows, function(i, $attachment) {
+    //     jQuery.doTimeout('buildAnchor', DOM_UPDATE_REPROCESS_WAIT_TIME_MS, function() {
+    //         var view_node = jQuery($attachment).find('a[href*="&disp=inline"][href*="&safe=1&zw"]');
+    //         if(view_node.length > 0) {
+    //             var _href = view_node.attr('href');
+    //             _href = generate_download_url(_href);
+
+    //             var download_link = jQuery("<a>")
+    //                 .attr({
+    //                     "class" : "docs_autosave_anchor",
+    //                     "target": "_blank",
+    //                     "href"  : _href,
+    //                     "style" : "text-decoration:none;"
+    //                 })
+    //                 .append('Save To Docs');
+
+    //             view_node.after(download_link);
+    //             view_node.after("&nbsp;&nbsp;&nbsp;");
+                
+    //             if(jQuery('a.docs_autosave_anchor').length) {
+    //                 //elem.doTimeout('buildAnchor');
+    //                 return false;
+    //             }
+    //         } else {
+    //             return true;
+    //         }
+    //     });
+        
+    // });
+
+    var view_nodes = jQuery('#canvas_frame').contents().find('a[href*="&disp=inline"][href*="&safe=1&zw"]'),
+        nodes_altered = 0;
+
+    jQuery.each(view_nodes, function(i, view_node) {
+        $view_node = jQuery(view_node);
+        if(!nodeProcessed($view_node)) {
+            var _href = $view_node.attr('href');
                 _href = generate_download_url(_href);
 
-                var download_link = jQuery("<a>")
-                    .attr({
-                        "class" : "docs_autosave_anchor",
-                        "target": "_blank",
-                        "href"  : _href,
-                        "style" : "text-decoration:none;"
-                    })
-                    .append('Save To Docs');
+            var download_link = jQuery("<a>")
+                .attr({
+                    "class" : "docs_autosave_anchor",
+                    "target": "_blank",
+                    "href"  : _href,
+                    "style" : "text-decoration:none;"
+                })
+                .append('Save To Docs');
 
-                view_node.after(download_link);
-                view_node.after("&nbsp;&nbsp;&nbsp;");
-                
-                if(jQuery('a.docs_autosave_anchor').length) {
-                    //elem.doTimeout('buildAnchor');
-                    return false;
-                }
-            } else {
-                return true;
-            }
-        });
-        
+            $view_node.after(download_link);
+            $view_node.after("&nbsp;&nbsp;&nbsp;");
+        }
     });
+}
+
+function nodeProcessed($view_node) {
+    var $next_node = $view_node.next();
+    if($next_node.hasClass('docs_autosave_anchor')) {
+        return true;
+    }
+    return false;
 }
 
 function generate_download_url(gm_url) {
@@ -79,17 +109,24 @@ function generate_download_url(gm_url) {
     return result;
 }
 
-function handleDomChanges() {
-    jQuery.doTimeout(500, function() {
-        built_anchor();
-    });
-}
+// function handleDomChanges() {
+//     jQuery.doTimeout('domChangesTimer', DOM_UPDATE_REPROCESS_WAIT_TIME_MS, function() {
+//         built_anchor();
+//     });
+// }
 
-Gmailr.init(function(G) {
-    G.observe('viewChanged', function(view) {
-        console.log(view);
-        if(view == 'conversation') {
-            handleDomChanges();
-        }
+// Gmailr.init(function(G) {
+//     G.observe('viewChanged', function(view) {
+//         if(view == 'conversation') {
+//             handleDomChanges();
+//         } else {
+//             jQuery.doTimeout('domChangesTimer');
+//         }
+//     });
+// });
+
+jQuery(document).ready(function(){
+    jQuery.doTimeout('domChangesTimer', DOM_UPDATE_REPROCESS_WAIT_TIME_MS, function() {
+        built_anchor();
     });
 });
