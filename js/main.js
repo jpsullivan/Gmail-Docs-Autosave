@@ -109,7 +109,6 @@ function generate_download_url(gm_url) {
 jQuery(document).ready(function() {
     jQuery.doTimeout('delayed', DOM_UPDATE_REPROCESS_WAIT_TIME_MS, function() {
         built_anchor();
-        console.log('scan dat shit');
 
         return true; // continue polling
     });
