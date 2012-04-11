@@ -1,7 +1,4 @@
-//Gmailr.debug = false; // Turn verbose debugging messages on
-
-var DOM_UPDATE_REPROCESS_WAIT_TIME_MS = 3000;  // 3s
-var NUM_TIMES_CHECKED_FOR_DOM = 0;
+var DOM_UPDATE_REPROCESS_WAIT_TIME_MS = 2000;  // 2s
 
 function getUrlVars(gm_url) {
     gm_url = decodeURIComponent(gm_url);
@@ -48,8 +45,8 @@ function built_anchor() {
         
     // });
 
-    var view_nodes = jQuery('#canvas_frame').contents().find('a[href*="&disp=inline"][href*="&safe=1&zw"]'),
-        nodes_altered = 0;
+
+    var view_nodes = jQuery('#canvas_frame').contents().find('a[href*="&disp=inline"][href*="&safe=1&zw"][class!="docs_autosave_anchor"]');
 
     jQuery.each(view_nodes, function(i, view_node) {
         $view_node = jQuery(view_node);
@@ -109,24 +106,11 @@ function generate_download_url(gm_url) {
     return result;
 }
 
-// function handleDomChanges() {
-//     jQuery.doTimeout('domChangesTimer', DOM_UPDATE_REPROCESS_WAIT_TIME_MS, function() {
-//         built_anchor();
-//     });
-// }
-
-// Gmailr.init(function(G) {
-//     G.observe('viewChanged', function(view) {
-//         if(view == 'conversation') {
-//             handleDomChanges();
-//         } else {
-//             jQuery.doTimeout('domChangesTimer');
-//         }
-//     });
-// });
-
-jQuery(document).ready(function(){
-    jQuery.doTimeout('domChangesTimer', DOM_UPDATE_REPROCESS_WAIT_TIME_MS, function() {
+jQuery(document).ready(function() {
+    jQuery.doTimeout('delayed', DOM_UPDATE_REPROCESS_WAIT_TIME_MS, function() {
         built_anchor();
+        console.log('scan dat shit');
+
+        return true; // continue polling
     });
 });
