@@ -35,7 +35,6 @@ if(top.document == document) {
                 chrome.extension.getURL("js/lib/jquery.doTimeout-min.js")],
         complete: function () {
             yepnope(chrome.extension.getURL("js/main.js?n=8937276128"));
-            console.log('Loaded main.js');
         }
     });
 

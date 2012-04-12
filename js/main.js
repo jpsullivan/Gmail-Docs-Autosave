@@ -46,7 +46,10 @@ function built_anchor() {
     // });
 
 
-    var view_nodes = jQuery('#canvas_frame').contents().find('a[href*="&disp=inline"][href*="&safe=1&zw"][class!="docs_autosave_anchor"]');
+    var view_nodes = jQuery('#canvas_frame').contents().find('a[href*="&disp=inline"][href*="&safe=1&zw"][class!="docs_autosave_anchor"]:hasText');
+    var openformat_nodes = jQuery('#canvas_frame').contents().find('a[href*="a=v&"][class!="docs_autosave_anchor"]:hasText');
+
+    view_nodes = view_nodes.add(openformat_nodes);
 
     jQuery.each(view_nodes, function(i, view_node) {
         $view_node = jQuery(view_node);
@@ -105,6 +108,14 @@ function generate_download_url(gm_url) {
 
     return result;
 }
+
+jQuery.expr[':'].hasText = function(element, index) {
+     // if there is only one child, and it is a text node
+     if (element.childNodes.length == 1 && element.firstChild.nodeType == 3) {
+        return jQuery.trim(element.innerHTML).length > 0;
+     }
+     return false;
+};
 
 jQuery(document).ready(function() {
     jQuery.doTimeout('delayed', DOM_UPDATE_REPROCESS_WAIT_TIME_MS, function() {
