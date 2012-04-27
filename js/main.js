@@ -14,40 +14,8 @@ function getUrlVars(gm_url) {
 }
 
 function built_anchor() {
-    // var attachment_rows = jQuery('#canvas_frame').contents().find('div[role="main"] div.hq.gt table');
-    // jQuery.each(attachment_rows, function(i, $attachment) {
-    //     jQuery.doTimeout('buildAnchor', DOM_UPDATE_REPROCESS_WAIT_TIME_MS, function() {
-    //         var view_node = jQuery($attachment).find('a[href*="&disp=inline"][href*="&safe=1&zw"]');
-    //         if(view_node.length > 0) {
-    //             var _href = view_node.attr('href');
-    //             _href = generate_download_url(_href);
-
-    //             var download_link = jQuery("<a>")
-    //                 .attr({
-    //                     "class" : "docs_autosave_anchor",
-    //                     "target": "_blank",
-    //                     "href"  : _href,
-    //                     "style" : "text-decoration:none;"
-    //                 })
-    //                 .append('Save To Docs');
-
-    //             view_node.after(download_link);
-    //             view_node.after("&nbsp;&nbsp;&nbsp;");
-                
-    //             if(jQuery('a.docs_autosave_anchor').length) {
-    //                 //elem.doTimeout('buildAnchor');
-    //                 return false;
-    //             }
-    //         } else {
-    //             return true;
-    //         }
-    //     });
-        
-    // });
-
-
-    var view_nodes = jQuery('#canvas_frame').contents().find('a[href*="&disp=inline"][href*="&safe=1&zw"][class!="docs_autosave_anchor"]:hasText');
-    var openformat_nodes = jQuery('#canvas_frame').contents().find('a[href*="a=v&"][class!="docs_autosave_anchor"]:hasText');
+    var view_nodes = jQuery('#canvas_frame').contents().find('a[href*="&disp=inline"][href*="&safe=1&zw"][class!="drive_autosave_anchor"]:hasText');
+    var openformat_nodes = jQuery('#canvas_frame').contents().find('a[href*="a=v&"][class!="drive_autosave_anchor"]:hasText');
 
     view_nodes = view_nodes.add(openformat_nodes);
 
@@ -59,12 +27,12 @@ function built_anchor() {
 
             var download_link = jQuery("<a>")
                 .attr({
-                    "class" : "docs_autosave_anchor",
+                    "class" : "drive_autosave_anchor",
                     "target": "_blank",
                     "href"  : _href,
                     "style" : "text-decoration:none;"
                 })
-                .append('Save To Docs');
+                .append('Save To Drive');
 
             $view_node.after(download_link);
             $view_node.after("&nbsp;&nbsp;&nbsp;");
@@ -74,7 +42,7 @@ function built_anchor() {
 
 function nodeProcessed($view_node) {
     var $next_node = $view_node.next();
-    if($next_node.hasClass('docs_autosave_anchor')) {
+    if($next_node.hasClass('drive_autosave_anchor')) {
         return true;
     }
     return false;

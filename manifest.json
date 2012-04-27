@@ -1,7 +1,7 @@
 {
-    "name": "Gmail Attachments To Docs",
-    "version": "1.3.2",
-    "description": "Save those pesky Gmail attachments directly to Google Docs from the attachment list itself with a newly added Save To Docs link.",
+    "name": "Gmail Attachments To Drive",
+    "version": "1.3.3",
+    "description": "Save those pesky Gmail attachments directly to Google Drive from the attachment list itself with a newly added Save To Drive link.",
     "icons": {
       "128": "img/icon128.png",
       "16": "img/icon16.png",
