@@ -1,4 +1,4 @@
-var DOM_UPDATE_REPROCESS_WAIT_TIME_MS = 2000;  // 2s
+var $jq = jQuery.noConflict();
 
 function getUrlVars(gm_url) {
     gm_url = decodeURIComponent(gm_url);
@@ -14,18 +14,17 @@ function getUrlVars(gm_url) {
 }
 
 function built_anchor() {
-    var view_nodes = jQuery('#canvas_frame').contents().find('a[href*="&disp=inline"][href*="&safe=1&zw"][class!="drive_autosave_anchor"]:hasText');
-    var openformat_nodes = jQuery('#canvas_frame').contents().find('a[href*="a=v&"][class!="drive_autosave_anchor"]:hasText');
+    var view_nodes = $jq('#canvas_frame').contents().find('a[href*="&disp=inline"][href*="&safe=1&zw"][class!="drive_autosave_anchor"]:hasText');
+    var openformat_nodes = $jq('#canvas_frame').contents().find('a[href*="a=v&"][class!="drive_autosave_anchor"]:hasText');
 
     view_nodes = view_nodes.add(openformat_nodes);
 
-    jQuery.each(view_nodes, function(i, view_node) {
-        $view_node = jQuery(view_node);
+    $jq.each(view_nodes, function(i, view_node) {
+        $view_node = $jq(view_node);
         if(!nodeProcessed($view_node)) {
-            var _href = $view_node.attr('href');
-                _href = generate_download_url(_href);
+            var _href = generate_download_url($view_node.attr('href'));
 
-            var download_link = jQuery("<a>")
+            var download_link = $jq("<a>")
                 .attr({
                     "class" : "drive_autosave_anchor",
                     "target": "_blank",
@@ -55,7 +54,7 @@ function generate_download_url(gm_url) {
         params = "",
         result = '';
 
-    jQuery.each(url_vars, function(i, $url_var) {
+    $jq.each(url_vars, function(i, $url_var) {
         if(url_vars[$url_var] === void 0) { // if array key-value is undefined...
             params += '&'+$url_var;
         } else {
@@ -77,16 +76,17 @@ function generate_download_url(gm_url) {
     return result;
 }
 
-jQuery.expr[':'].hasText = function(element, index) {
+$jq.expr[':'].hasText = function(element, index) {
      // if there is only one child, and it is a text node
      if (element.childNodes.length == 1 && element.firstChild.nodeType == 3) {
-        return jQuery.trim(element.innerHTML).length > 0;
+        return $jq.trim(element.innerHTML).length > 0;
      }
      return false;
 };
 
-jQuery(document).ready(function() {
-    jQuery.doTimeout('delayed', DOM_UPDATE_REPROCESS_WAIT_TIME_MS, function() {
+$jq(document).ready(function() {
+    var DOM_UPDATE_REPROCESS_WAIT_TIME_MS = 2000;  // 2s
+    $jq.doTimeout('delayed', DOM_UPDATE_REPROCESS_WAIT_TIME_MS, function() {
         built_anchor();
 
         return true; // continue polling
