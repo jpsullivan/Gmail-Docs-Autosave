@@ -15,7 +15,7 @@ function getUrlVars(gm_url) {
 
 function built_anchor() {
     var view_nodes = $jq('table.Bs.nH.iY').contents().find('a[href*="&disp=inline"][href*="&safe=1&zw"][class!="drive_autosave_anchor"]:hasText');
-    var openformat_nodes = $jq('#table.Bs.nH.iY').contents().find('a[href*="a=v&"][class!="drive_autosave_anchor"]:hasText');
+    var openformat_nodes = $jq('table.Bs.nH.iY').contents().find('a[href*="a=v&"][class!="drive_autosave_anchor"]:hasText');
 
     view_nodes = view_nodes.add(openformat_nodes);
 
