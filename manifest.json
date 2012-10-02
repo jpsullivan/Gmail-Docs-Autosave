@@ -1,6 +1,6 @@
 {
     "name": "Gmail Attachments To Drive",
-    "version": "1.3.5",
+    "version": "1.3.6",
     "manifest_version": 2,
     "description": "Save those pesky Gmail attachments directly to Google Drive from the attachment list itself with a newly added Save To Drive link.",
     "icons": {
@@ -9,15 +9,16 @@
       "32": "img/icon32.png",
       "48": "img/icon48.png"
     },
-    "permissions": [
-        "tabs",
-        "*://mail.google.com/*"
-    ],
     "content_scripts": [
         {
             "matches" : ["*://mail.google.com/*"],
             "js": ["js/lib/yepnope-1.5.3-min.js","js/lib/bootstrap.js"],
             "run_at": "document_end"
         }
+    ],
+    "web_accessible_resources": ["js/lib/yepnope-1.5.3-min.js","js/lib/bootstrap.js","js/lib/jquery-1.6.4.min.js","js/lib/jquery.doTimeout-min.js","js/main.js"],
+    "permissions": [
+        "tabs",
+        "*://mail.google.com/*"
     ]
 }
