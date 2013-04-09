@@ -1,0 +1,318 @@
+{
+   "account": {
+      "message": "Account"
+   },
+   "apply": {
+      "message": "Apply"
+   },
+   "audio_default_filename": {
+      "message": "Untitled audio"
+   },
+   "auth_url_failure": {
+      "message": "User is not authorised to access $1",
+      "placeholders": {
+         "1": {
+            "content": "$1"
+         }
+      }
+   },
+   "cancel": {
+      "message": "Cancel"
+   },
+   "cannot_capture_chrome": {
+      "message": "Cannot capture Chrome pages."
+   },
+   "chrome_extension_name": {
+      "message": "Gmail Attachments to Drive"
+   },
+   "close": {
+      "message": "Close"
+   },
+   "convert_to_google_format": {
+      "message": "Convert to Google format"
+   },
+   "debug": {
+      "message": "Debug"
+   },
+   "default_filename": {
+      "message": "Untitled"
+   },
+   "docs_api_failure": {
+      "message": "Failure accessing Docs API: $1",
+      "placeholders": {
+         "1": {
+            "content": "$1"
+         }
+      }
+   },
+   "download_canceled": {
+      "message": "Download cancelled."
+   },
+   "download_failure": {
+      "message": "Download failure: $1.",
+      "placeholders": {
+         "1": {
+            "content": "$1"
+         }
+      }
+   },
+   "download_failure_no_data": {
+      "message": "Download failure: No data received."
+   },
+   "download_failure_too_big_mb": {
+      "message": "Download failure: Source too large ($1 MB).",
+      "placeholders": {
+         "1": {
+            "content": "$1"
+         }
+      }
+   },
+   "download_known_name": {
+      "message": "Downloading $1 ...",
+      "placeholders": {
+         "1": {
+            "content": "$1"
+         }
+      }
+   },
+   "download_unknown_name": {
+      "message": "Downloading ..."
+   },
+   "empty_page_capture": {
+      "message": "Could not capture contents of page as MHTML."
+   },
+   "enable_file_url": {
+      "message": "File URLs must be enabled with \"Allow access to file URLs\" option on Extensions settings page."
+   },
+   "ext_description": {
+      "message": "Save web content to  Google Drive."
+   },
+   "failure_page_capture": {
+      "message": "Could not capture contents of page as MHTML: $1.",
+      "placeholders": {
+         "1": {
+            "content": "$1"
+         }
+      }
+   },
+   "feedback_internal": {
+      "message": "Send feedback (internal only)"
+   },
+   "file_bug_internal": {
+      "message": "File a bug (internal only)"
+   },
+   "file_was_saved": {
+      "message": "\u003Ca id=\"$1\" href=\"$2\" target=\"_blank\"\u003E$3\u003C/a\u003E was saved to \u003Ca id=\"$4\" href=\"$5\" target=\"_blank\" class=\"no-break\"\u003EGoogle Drive\u003C/a\u003E.",
+      "placeholders": {
+         "1": {
+            "content": "$1"
+         },
+         "2": {
+            "content": "$2"
+         },
+         "3": {
+            "content": "$3"
+         },
+         "4": {
+            "content": "$4"
+         },
+         "5": {
+            "content": "$5"
+         }
+      }
+   },
+   "file_was_trashed": {
+      "message": "$1 has been moved to the bin. Go to \u003Ca id=\"$2\", href=\"$3\" target=\"_blank\" class=\"no-break\"\u003EGoogle Drive\u003C/a\u003E.",
+      "placeholders": {
+         "1": {
+            "content": "$1"
+         },
+         "2": {
+            "content": "$2"
+         },
+         "3": {
+            "content": "$3"
+         }
+      }
+   },
+   "google_drive": {
+      "message": "Google Drive"
+   },
+   "help": {
+      "message": "Help"
+   },
+   "html_default_filename": {
+      "message": "Untitled HTML"
+   },
+   "image_capture_failed": {
+      "message": "Image capture failed."
+   },
+   "image_capture_failed_reason": {
+      "message": "Image capture failed ($1)",
+      "placeholders": {
+         "1": {
+            "content": "$1"
+         }
+      }
+   },
+   "image_default_filename": {
+      "message": "Untitled image"
+   },
+   "invalid_url": {
+      "message": "Invalid URL: $1. Downloaded URLs must start with http://, https://, or file://.",
+      "placeholders": {
+         "1": {
+            "content": "$1"
+         }
+      }
+   },
+   "mhtml_default_filename": {
+      "message": "Untitled Page Capture.mht"
+   },
+   "misc": {
+      "message": "Misc"
+   },
+   "oauth_title": {
+      "message": "Redirecting to Google to Log In"
+   },
+   "options_header_text": {
+      "message": "Save to Google Drive extension options"
+   },
+   "options_title": {
+      "message": "Save to Google Drive options"
+   },
+   "page_size_not_supported": {
+      "message": "Page size is not supported: $1",
+      "placeholders": {
+         "1": {
+            "content": "$1"
+         }
+      }
+   },
+   "pdf_default_filename": {
+      "message": "Untitled PDF"
+   },
+   "percent": {
+      "message": "$1% done",
+      "placeholders": {
+         "1": {
+            "content": "$1"
+         }
+      }
+   },
+   "privacy": {
+      "message": "Privacy"
+   },
+   "redirecting": {
+      "message": "Redirecting..."
+   },
+   "rename": {
+      "message": "Rename"
+   },
+   "rename_prompt": {
+      "message": "Rename:"
+   },
+   "save_as_html": {
+      "message": "HTML source (.html)"
+   },
+   "save_as_htmldoc": {
+      "message": "Google Document"
+   },
+   "save_as_image_entire": {
+      "message": "Image of entire page (.png)"
+   },
+   "save_as_image_visible": {
+      "message": "Image of visible page (.png)"
+   },
+   "save_as_mhtml": {
+      "message": "Web archive (.mht)"
+   },
+   "save_audio": {
+      "message": "Save Audio to Google Drive"
+   },
+   "save_image": {
+      "message": "Save Image to Google Drive"
+   },
+   "save_link": {
+      "message": "Save Link to Google Drive"
+   },
+   "save_page_as": {
+      "message": "Save page as:"
+   },
+   "save_to_google_drive_action": {
+      "message": "Save to Google Drive"
+   },
+   "save_video": {
+      "message": "Save Video to Google Drive"
+   },
+   "saving": {
+      "message": "Saving $1 to Google Drive...",
+      "placeholders": {
+         "1": {
+            "content": "$1"
+         }
+      }
+   },
+   "send_feedback": {
+      "message": "Send feedback"
+   },
+   "sign_out": {
+      "message": "Sign Out"
+   },
+   "start_download_exception": {
+      "message": "Failure starting download: $1",
+      "placeholders": {
+         "1": {
+            "content": "$1"
+         }
+      }
+   },
+   "text_default_filename": {
+      "message": "Untitled text"
+   },
+   "trash": {
+      "message": "Bin"
+   },
+   "unspecified_error": {
+      "message": "Unspecified error"
+   },
+   "upload_canceled": {
+      "message": "Upload cancelled"
+   },
+   "upload_failure": {
+      "message": "Upload failure: $1.",
+      "placeholders": {
+         "1": {
+            "content": "$1"
+         }
+      }
+   },
+   "uploading": {
+      "message": "Uploading $1 to Google Drive...",
+      "placeholders": {
+         "1": {
+            "content": "$1"
+         }
+      }
+   },
+   "use_browser_action": {
+      "message": "\u003Ca href=\"$1\" target=\"_blank\"\u003EOpen the link\u003C/a\u003E and save the page using the Save to Google Drive button to the right of the address bar.",
+      "placeholders": {
+         "1": {
+            "content": "$1"
+         }
+      }
+   },
+   "use_browser_action_title": {
+      "message": "This is a link to a web page"
+   },
+   "user_info_failure": {
+      "message": "Failure accessing user information."
+   },
+   "video_default_filename": {
+      "message": "Untitled video"
+   },
+   "xml_default_filename": {
+      "message": "Untitled XML"
+   }
+}

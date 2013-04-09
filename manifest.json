@@ -1,24 +1,61 @@
 {
-    "name": "Gmail Attachments To Drive",
-    "version": "1.4.0",
-    "manifest_version": 2,
-    "description": "Save those pesky Gmail attachments directly to Google Drive from the attachment list itself with a newly added Save To Drive link.",
-    "icons": {
-      "128": "img/icon128.png",
-      "16": "img/icon16.png",
-      "32": "img/icon32.png",
-      "48": "img/icon48.png"
-    },
-    "content_scripts": [
-        {
-            "matches" : ["*://mail.google.com/*"],
-            "js": ["js/lib/yepnope-1.5.3-min.js","js/lib/bootstrap.js"],
-            "run_at": "document_end"
-        }
-    ],
-    "web_accessible_resources": ["js/lib/yepnope-1.5.3-min.js","js/lib/bootstrap.js","js/lib/jquery-1.6.4.min.js","js/lib/jquery.doTimeout-min.js","js/main.js"],
-    "permissions": [
-        "tabs",
-        "*://mail.google.com/*"
+  "name": "Gmail Attachments To Drive",
+  "version": "2.0",
+  "manifest_version": 2,
+  "description": "Save those pesky Gmail attachments directly to Google Drive from the attachment list itself with a newly added Save To Drive link.",
+  "icons": {
+    "128": "img/icon128.png",
+    "16": "img/icon16.png",
+    "32": "img/icon32.png",
+    "48": "img/icon48.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/lib/chrome_ex_oauthsimple.js",
+      "js/lib/chrome_ex_oauth.js"
     ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "js/lib/yepnope-1.5.3-min.js",
+        "js/lib/bootstrap.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "intents": {
+    "http://webintents.org/save": [
+      {
+        "disposition": "inline",
+        "href": "handleintent.html",
+        "title": "__MSG_SAVE_TO_GOOGLE_DRIVE_ACTION__",
+        "type": [
+          "*"
+        ]
+      }
+    ]
+  },
+  "web_accessible_resources": [
+    "js/lib/yepnope-1.5.3-min.js",
+    "js/lib/bootstrap.js",
+    "js/lib/jquery-1.6.4.min.js",
+    "js/lib/gdrive.js",
+    "js/lib/jquery.doTimeout-min.js",
+    "js/lib/chrome_ex_oauthsimple.js",
+    "js/lib/chrome_ex_oauth.js",
+    "js/main.js",
+    "chrome_ex_oauth.html"
+  ],
+  "permissions": [
+    "tabs",
+    "notifications",
+    "webRequest",
+    "contextMenus",
+    "*://mail.google.com/*"
+  ]
 }

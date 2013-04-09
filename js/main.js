@@ -31,12 +31,17 @@ function built_anchor() {
                     "href"  : _href,
                     "style" : "text-decoration:none;"
                 })
-                .append('Save To Drive');
+                .append('Save To Drive')
+                .click(testAuth());
 
             $view_node.after(download_link);
             $view_node.after("&nbsp;&nbsp;&nbsp;");
         }
     });
+}
+
+function testAuth() {
+    this.client = new gdocs.Client;
 }
 
 function nodeProcessed($view_node) {
